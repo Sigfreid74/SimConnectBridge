@@ -81,9 +81,7 @@ Unplug and replug your panels.
 
 See [bridge/README.md](bridge/README.md) for detailed build instructions.
 
-```bash
-cd bridge
-dotnet build -c Release
+Unfortunately this must be done on a windows computer or virtual environment using Visual Studio
 ```
 copy SimConnectBridge.exe into your MSFS2020 Proton Prefix directory.
 
@@ -95,7 +93,7 @@ pip install hidapi
 
 ### 4. Run Everything
 
-****Start SimConnectBridge with MSFS2020 **
+**Start SimConnectBridge with MSFS2020**
 edit exe.xml inside:
 
 YOUR STEAM LIBARY FOLDER /steamapps/compatdata/1250410/pfx/drive_c/users/steamuser/AppData/Roaming/Microsoft Flight Simulator/
@@ -110,7 +108,7 @@ add a 'Launch.Addon' section:
 </Launch.Addon>
 
 
-**Start the Panel Reader(s)** - 
+**Start the Panel Reader(s)**
 ```bash
 cd panels
 ./launch_all_panels.sh
