@@ -1,0 +1,15 @@
+# Logitech / Saitek Flight Panels
+
+# Ignore as generic input devices
+SUBSYSTEM=="input", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0d05", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+SUBSYSTEM=="input", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0d06", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+SUBSYSTEM=="input", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0d67", ENV{LIBINPUT_IGNORE_DEVICE}="1"
+
+# Better access: group 'input' + uaccess tag (allows non-root without 0666 world)
+SUBSYSTEM=="usb", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0d05", MODE="0660", GROUP="input", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0d67", MODE="0660", GROUP="input", TAG+="uaccess"
+SUBSYSTEM=="usb", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0d06", MODE="0660", GROUP="input", TAG+="uaccess"
+
+SUBSYSTEM=="hidraw*", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0d05", MODE="0660", GROUP="input", TAG+="uaccess"
+SUBSYSTEM=="hidraw*", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0d06", MODE="0660", GROUP="input", TAG+="uaccess"
+SUBSYSTEM=="hidraw*", ATTRS{idVendor}=="06a3", ATTRS{idProduct}=="0d67", MODE="0660", GROUP="input", TAG+="uaccess"
