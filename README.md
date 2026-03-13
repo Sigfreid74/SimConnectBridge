@@ -212,10 +212,10 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ## 🙏 Credits
 
-- **Reverse Engineering & Development**: [Your Name/GitHub Handle]
+- **Reverse Engineering & Development**: Sigfreid74
 - **SimConnect**: Microsoft Flight Simulator SDK
 - **hidapi**: Signal 11 Software
-- **Logitech**: For creating these awesome panels!
+- **Logitech/Saitek**: For creating these awesome panels!
 
 ## ⭐ Acknowledgments
 
@@ -223,7 +223,7 @@ Special thanks to:
 - The Linux flight sim community
 - Proton/Wine developers for making MSFS possible on Linux
 - Everyone who tested and provided feedback
-
+- Also some AI assistance from Claude , Copilot & Chatpgt!
 ---
 
 **Enjoy your flights!** ✈️
