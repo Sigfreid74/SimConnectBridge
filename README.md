@@ -85,6 +85,7 @@ See [bridge/README.md](bridge/README.md) for detailed build instructions.
 cd bridge
 dotnet build -c Release
 ```
+copy SimConnectBridge.exe into your MSFS2020 Proton Prefix directory.
 
 ### 3. Install Python Dependencies
 
@@ -94,14 +95,22 @@ pip install hidapi
 
 ### 4. Run Everything
 
-**Terminal 1** - Start the C# Bridge:
-```bash
-cd bridge
-WINEPREFIX=~/.steam/steam/steamapps/compatdata/1250410/pfx \
-wine bin/Release/net8.0/SimConnectBridge.exe
-```
+****Start SimConnectBridge with MSFS2020 **
+edit exe.xml inside:
 
-**Terminal 2** - Start the Panel Readers:
+YOUR STEAM LIBARY FOLDER /steamapps/compatdata/1250410/pfx/drive_c/users/steamuser/AppData/Roaming/Microsoft Flight Simulator/
+
+add a 'Launch.Addon' section:
+
+<Launch.Addon>
+        <Name>SimConnectBridge</Name>
+        <Disabled>False</Disabled>
+        <Path>C:\SimConnectBridge.exe</Path>
+        <CommandLine></CommandLine>
+</Launch.Addon>
+
+
+**Start the Panel Reader(s)** - 
 ```bash
 cd panels
 ./launch_all_panels.sh
@@ -109,9 +118,9 @@ cd panels
 
 Or manually:
 ```bash
-python3 switchpanel_complete.py &
-python3 radiopanel_with_xpdr_blink.py &
-python3 multipanel_improved.py &
+python3 switchpanel_bridge.py &
+python3 radiopanel_bridge.py &
+python3 multipanel_bridge.py &
 ```
 
 ### 5. Start MSFS and Fly!
