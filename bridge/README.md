@@ -9,3 +9,5 @@
 
 ### SimConnect.dll
 Located in your MSFS installation:
+
+~/.steam/steam/steamapps/common/MicrosoftFlightSimulator/FlightSimulator.exe_Data/Plugins/x64/SimConnect.dll
