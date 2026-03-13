@@ -223,7 +223,7 @@ Special thanks to:
 - The Linux flight sim community
 - Proton/Wine developers for making MSFS possible on Linux
 - Everyone who tested and provided feedback
-- Also some AI assistance from Claude , Copilot & Chatpgt!
+- Also some AI assistance from Claude , Copilot & ChatGPT!
 ---
 
 **Enjoy your flights!** ✈️
