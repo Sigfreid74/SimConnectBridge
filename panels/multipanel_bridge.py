@@ -33,6 +33,9 @@ except Exception as e:
     print("TCP connect failed:", e)
     sys.exit(1)
 
+last_heading_turn_ms = 0
+last_heading_direction = None
+
 def send_cmd(cmd, data=None):
     pkt = {"cmd": cmd}
     if data is not None:
@@ -42,15 +45,17 @@ def send_cmd(cmd, data=None):
     except Exception as e:
         print("Send error:", e)
 
-def send_cmd_debounced(cmd, cooldown_ms=50):
+def send_cmd_debounced(cmd, cooldown_ms=50, repeat=1):
     """Debounced command send for rotary encoder"""
     now = time.time() * 1000
     last = last_knob_time.get(cmd, 0)
     if now - last < cooldown_ms:
         return
     last_knob_time[cmd] = now
-    send_cmd(cmd)
-    print(f"KNOB: {cmd}")
+    for _ in range(repeat):
+        send_cmd(cmd)
+    suffix = f" x{repeat}" if repeat > 1 else ""
+    print(f"KNOB: {cmd}{suffix}")
 
 def send_if_changed(button_name, new_state, cmd):
     """Only send if button state changed"""
@@ -303,7 +308,21 @@ while running:
                 elif mode == "IAS":
                     send_cmd_debounced("AP_SPD_VAR_INC" if cw else "AP_SPD_VAR_DEC")
                 elif mode == "HDG":
-                    send_cmd_debounced("HEADING_BUG_INC" if cw else "HEADING_BUG_DEC")
+                    # Both physical rings produce the same HID signal, so use
+                    # turn speed instead: deliberate turns remain one degree,
+                    # while rapid turns in the same direction move five degrees.
+                    now_ms = time.time() * 1000
+                    direction = "INC" if cw else "DEC"
+                    fast = (
+                        direction == last_heading_direction
+                        and 0 < (now_ms - last_heading_turn_ms) < 180
+                    )
+                    last_heading_turn_ms = now_ms
+                    last_heading_direction = direction
+                    send_cmd_debounced(
+                        f"HEADING_BUG_{direction}",
+                        repeat=5 if fast else 1,
+                    )
                 elif mode == "CRS":
                     send_cmd_debounced("VOR1_OBI_INC" if cw else "VOR1_OBI_DEC")
 
